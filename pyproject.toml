@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "shanksprimereciprocalspy"
+version = "0.1.0"
+description = "Shanks Prime Resiprocals"
+authors = ["ShanKonduru <ShanKonduru@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+numpy = "^1.26.4"
+
+[tool.poetry.group.dev.dependencies]
+numpy = "^1.26.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
