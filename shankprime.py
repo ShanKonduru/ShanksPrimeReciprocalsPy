@@ -1,3 +1,5 @@
+import csv
+
 def is_prime(n):
     """Check if a number is prime."""
     if n <= 1:
@@ -34,16 +36,24 @@ def find_reciprocal_pattern(prime):
     return repeating_pattern
 
 if __name__ == "__main__":
-    prime = int(input("Enter a prime number: "))
-    
-    if not is_prime(prime):
-        print("Input is not a prime number.")
-    else:
-        pattern = find_reciprocal_pattern(prime)
+    with open('./prime_reciprocals.csv', 'w', newline='') as csvfile:
+        fieldnames = ['Prime#', 'Prime Reciprocal', 'Pattern Length']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         
-        if pattern:
-            print(f"Repeating pattern in 1/{prime}:")
-            print("".join(map(str, pattern)))
-            print(f"The pattern has a length of {len(pattern)}")
-        else:
-            print(f"1/{prime} is a terminating decimal.")
+        writer.writeheader()
+        
+        for num in range(1, 100001):
+            if is_prime(num):
+                reciprocal = 1 / num
+                pattern = find_reciprocal_pattern(num)
+                
+                if pattern:
+                    pattern_length = len(pattern)
+                else:
+                    pattern_length = 0
+                
+                writer.writerow({
+                    'Prime#': num,
+                    'Prime Reciprocal': reciprocal,
+                    'Pattern Length': pattern_length
+                })
